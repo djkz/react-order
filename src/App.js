@@ -39,10 +39,10 @@ class App extends Component {
                 <th>
                   <OrderBy onOrder={(data) => (order) => orderBy(data, order.split(' ')[0], order.split(' ')[1])}
                     render = { (onOrder, currentOrder) => {
-                      if( currentOrder === 'order asc' ) return <a onClick={(e) => onOrder('order desc')}>order ^</a> 
+                        if( currentOrder === 'order asc' ) return <a onClick={(e) => onOrder('order desc')}>order ^</a> 
                         if( currentOrder === 'order desc') return <a onClick={(e) => onOrder('order asc')}>order v</a> 
                         return <a onClick={(e) => onOrder('order desc')}>order x</a> 
-                    } 
+                      } 
                     }
                   />
                 </th>
