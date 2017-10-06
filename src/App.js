@@ -5,10 +5,10 @@ import { Order, OrderBy, Ordered} from './components/Order/index.js'
 import { orderBy } from 'lodash'
 
 const data = [
-  {id: 2, name: "item 1", order: 2 },
-  {id: 1, name: "item 2", order: 3 },
-  {id: 3, name: "item 3", order: 1 },
-  {id: 4, name: "item 4", order: 4 },
+  {id: 1, name: "item 1", amount: 20 },
+  {id: 2, name: "item 2", amount: 10 },
+  {id: 3, name: "item 3", amount: 20 },
+  {id: 4, name: "item 4", amount: 15 },
 ]
 
 class App extends Component {
@@ -39,9 +39,9 @@ class App extends Component {
                 <th>
                   <OrderBy onOrder={(data) => (order) => orderBy(data, order.split(' ')[0], order.split(' ')[1])}
                     render = { (onOrder, currentOrder) => {
-                        if( currentOrder === 'order asc' ) return <a onClick={(e) => onOrder('order desc')}>order ^</a> 
-                        if( currentOrder === 'order desc') return <a onClick={(e) => onOrder('order asc')}>order v</a> 
-                        return <a onClick={(e) => onOrder('order desc')}>order x</a> 
+                        if( currentOrder === 'amount asc' ) return <a onClick={(e) => onOrder('amount desc')}>price ^</a> 
+                        if( currentOrder === 'amount desc') return <a onClick={(e) => onOrder('amount asc')}>price v</a> 
+                        return <a onClick={(e) => onOrder('amount desc')}>price x</a> 
                       } 
                     }
                   />
@@ -50,7 +50,7 @@ class App extends Component {
               </thead>
               <tbody>
                 <Ordered render={(data) => data.map(d => (
-                  <tr key={d.id}><td>{d.name}</td><td>{d.id}</td><td>{d.order}</td></tr>
+                  <tr key={d.id}><td>{d.name}</td><td>{d.id}</td><td>${d.amount}.00</td></tr>
                 ) )} />
               </tbody>
           </table>
