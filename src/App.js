@@ -12,6 +12,23 @@ const data = [
 ]
 
 class App extends Component {
+
+  orderTH(name){
+    // repeated sort functionality can be extracted
+    return (
+      <th>
+        <OrderBy onOrder={(data) => (order) => orderBy(data, order.split(' ')[0], order.split(' ')[1])}
+          render = { (onOrder, currentOrder) => {
+            if( currentOrder === `${name} asc` ) return <a onClick={(e) => onOrder(`${name} desc`)}>{name} ^</a> 
+              if( currentOrder === `${name} desc`) return <a onClick={(e) => onOrder(`${name} asc`)}>{name} v</a> 
+              return <a onClick={(e) => onOrder(`${name} desc`)}>{name} x</a> 
+          } 
+          }
+        />
+      </th>
+    )
+  }
+
   render() {
     return (
       <div className="App">
@@ -36,16 +53,7 @@ class App extends Component {
                     }
                   />
                 </th>
-                <th>
-                  <OrderBy onOrder={(data) => (order) => orderBy(data, order.split(' ')[0], order.split(' ')[1])}
-                    render = { (onOrder, currentOrder) => {
-                        if( currentOrder === 'amount asc' ) return <a onClick={(e) => onOrder('amount desc')}>price ^</a> 
-                        if( currentOrder === 'amount desc') return <a onClick={(e) => onOrder('amount asc')}>price v</a> 
-                        return <a onClick={(e) => onOrder('amount desc')}>price x</a> 
-                      } 
-                    }
-                  />
-                </th>
+                { this.orderTH("amount") }
               </tr>
               </thead>
               <tbody>
